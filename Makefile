@@ -12,12 +12,13 @@ F77 = gfortran
 CC = gcc
 CCC = g++ 
 
-CFLAGS = -fPIC -O3 -I/ext3/miniconda3/include/python3.8 \
-	-I/ext3/miniconda3/lib/python3.8/site-packages/numpy/core/include
+CFLAGS = -fPIC -O0 -g -I/home/aadcroft/.conda/envs/subgrid38/include/python3.8 \
+       -I/home/aadcroft/.conda/envs/subgrid38/lib/python3.8/site-packages/numpy/core/include \
+        -DNPY_NO_DEPRECATED_API=NPY_1_7_API_VERSION
 
-FFLAGS = -fPIC -O3
+FFLAGS = -fPIC -O0 -g
 
-LIBS = -L/ext3/miniconda3/lib -lpython3.8 -lstdc++
+LIBS = -L/home/aadcroft/.conda/envs/subgrid38/lib -lpython3.8 -lstdc++
 Link = $(F77) $(CFLAGS)
 
 EXENAME = main.exe
