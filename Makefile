@@ -28,6 +28,9 @@ OBJS =  $(O)/main.o  $(O)/runpy.o $(O)/pyext.o  $(O)/linend.o
 $(EXENAME) : $(OBJS) 
 	$(Link) -o $(EXENAME) $(OBJS) $(LIBS)
 
+run: $(EXENAME)
+	LD_LIBRARY_PATH=/home/aadcroft/.conda/envs/subgrid38/lib/ ./$(EXENAME)
+
 $(O)/%.o: %.c
 	cd $(O) ; $(CC)  $(CFLAGS) -c $<
 $(O)/%.o: %.cc
