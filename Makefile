@@ -29,7 +29,7 @@ $(EXENAME) : $(OBJS)
 	$(Link) -o $(EXENAME) $(OBJS) $(LIBS)
 
 run: $(EXENAME)
-	LD_LIBRARY_PATH=/home/aadcroft/.conda/envs/subgrid38/lib/ ./$(EXENAME)
+	LD_LIBRARY_PATH=/home/aadcroft/.conda/envs/subgrid38/lib/ PYTHONPATH=`pwd` ./$(EXENAME)
 
 $(O)/%.o: %.c
 	cd $(O) ; $(CC)  $(CFLAGS) -c $<
