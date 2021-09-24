@@ -1,3 +1,4 @@
+PYTHONROOT ?= /net/aja/miniconda3/envs/py38
 
 # The integer number in this Makefile is I4, 
 # please uncomment this line in WHAM.py
@@ -12,13 +13,13 @@ F77 = gfortran
 CC = gcc
 CCC = g++ 
 
-CFLAGS = -fPIC -O0 -g -I/home/aadcroft/.conda/envs/subgrid38/include/python3.8 \
-       -I/home/aadcroft/.conda/envs/subgrid38/lib/python3.8/site-packages/numpy/core/include \
+CFLAGS = -fPIC -O0 -g -I$(PYTHONROOT)/include/python3.8 \
+       -I$(PYTHONROOT)/lib/python3.8/site-packages/numpy/core/include \
         -DNPY_NO_DEPRECATED_API=NPY_1_7_API_VERSION
 
 FFLAGS = -fPIC -O0 -g
 
-LIBS = -L/home/aadcroft/.conda/envs/subgrid38/lib -lpython3.8 -lstdc++
+LIBS = -L$(PYTHONROOT)/lib -lpython3.8 -lstdc++
 Link = $(F77) $(CFLAGS)
 
 EXENAME = main.exe
@@ -29,7 +30,7 @@ $(EXENAME) : $(OBJS)
 	$(Link) -o $(EXENAME) $(OBJS) $(LIBS)
 
 run: $(EXENAME)
-	LD_LIBRARY_PATH=/home/aadcroft/.conda/envs/subgrid38/lib/ PYTHONPATH=`pwd` ./$(EXENAME)
+	LD_LIBRARY_PATH=$(PYTHONROOT)/lib/ PYTHONPATH=`pwd` ./$(EXENAME)
 
 $(O)/%.o: %.c
 	cd $(O) ; $(CC)  $(CFLAGS) -c $<
